@@ -88,19 +88,26 @@ Email: j.a.wallmeier@student.tue.nl}}
 
 
 \section{Introduction}
-Keeping plants alive can be a very time consuming task: it requires knowledge about different types of plants as well as periodical checks if these requirements are fulfilled.
-The system that we want to develop in this application has the aim of monitoring all plants in you home. 
-
-\hfill mds
+Keeping plants alive can be a very time consuming task: it requires knowledge about different types of plants as well as periodical checks if these requirements are fulfilled. There for it would be much more convenient to have a single device which provides all the necessary information to keep all the plants healthy. This ''Hub'' gets the information wirelessly through a network of sensor nodes which can be placed directly in the soil of each plant.
  
-\hfill August 26, 2015
+\hfill \today
 
-\subsection{Subsection Heading Here}
-Subsection text here.
+\section{Design}
+\subsection{Sensor Node}
+The nodes have to be small in size to fit even in small plant pots. They should be battery powered and in order to be able to acquire the necessary data, they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with the Hub.
 
+Each sensor node should be able to measure the following:
+\begin{itemize}
+	\item Brightness
+	\item Temperature
+	\item Soil humidity
+	\item Air humidity
+	\item Ph-Value
+\end{itemize}
+However, a high sampling rate is not necessary and therefore keeping the sampling rate to a minimum increases battery life substantially. For the same reason it is advisable to decrease the transmission rate by only sending data upon significant change.
 
-\subsubsection{Subsubsection Heading Here}
-Subsubsection text here.
+\subsection{Hub}
+The Hub has to be able to collect all data provided from the nodes. It can be connected to the buildings power grid and internet. A user interface (UI) should be digitally accessible via touchscreen, webpage and/or app. Additionally the system should be able to inform the user about critical sensor values. To decide whether a value is critical or not, the Hub has to either know which type of plant the sensor monitors and then check a internet database for specific requirements or rely on user defined values.
 
 
 %\begin{figure}[!t]
@@ -147,7 +154,7 @@ Subsubsection text here.
 The conclusion goes here.
 
 \section*{Acknowledgment}
-The authors would like to thank...
+The authors would like to thank your mum.
 
 
 
