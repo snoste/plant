@@ -56,7 +56,8 @@
 
 
 \begin{document}
-\title{PLANTS\\Wireless Monitoring System}
+\title{PLANTS\\Scalable Wireless Plant Monitoring System\\ {\fontsize{13}{0}\selectfont 5LIC0 Networked embedded systems - Report 1 - Teacher: dr. M. Nabi Najafabadi Msc} \\ {\fontsize{13}{0}\selectfont September 11th, 2016}}
+
 
 \author{\IEEEauthorblockN{Filippo Bernardi}
 \IEEEauthorblockA{Bologna University, Italy\\
@@ -88,13 +89,12 @@ Email: j.a.wallmeier@student.tue.nl}}
 
 
 \section{Introduction}
-Keeping plants alive can be a very time consuming task: it requires knowledge about different types of plants as well as periodical checks if these requirements are fulfilled. There for it would be much more convenient to have a single device which provides all the necessary information to keep all the plants healthy. This ''Hub'' gets the information wirelessly through a network of sensor nodes which can be placed directly in the soil of each plant.
- 
-\hfill \today
+Keeping plants alive can be a very time consuming task: it requires knowledge about different types of plants and their needs as well as periodical checks if their requirements are fulfilled. Therefore it would be much more convenient to have a single device which provides all the necessary information to keep all the plants healthy. This Hub gets the information wirelessly through a network of sensor nodes which can be placed directly in the soil of each plant. The sensor nodes should not have to communicate directly to the Hub but also through each other, creating a scalable wireless ad hoc network for larger areas.
+% \hfill \today
 
 \section{Design}
 \subsection{Sensor Node}
-The nodes have to be small in size to fit even in small plant pots. They should be battery powered and in order to be able to acquire the necessary data, they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with the Hub.
+The nodes have to be small in size to fit even in small pots. They should be battery powered and not need any attention from the user. Each node should sample data for one plant, then they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with the Hub.
 
 Each sensor node should be able to measure the following:
 \begin{itemize}
