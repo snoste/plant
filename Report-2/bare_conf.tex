@@ -1,0 +1,183 @@
+
+%% bare_conf.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+\documentclass[conference]{IEEEtran}
+\usepackage{cite}
+\usepackage[pdftex]{graphicx}
+ % \graphicspath{{../pdf/}{../jpeg/}}
+ % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\usepackage{amsmath}
+%\usepackage{algorithmic}
+%\usepackage{array}
+%\usepackage{url}
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+
+\begin{document}
+\title{Report 2\\Related Work and Design}
+
+\author{\IEEEauthorblockN{Filippo Bernardi}
+\IEEEauthorblockA{Bologna University, Italy\\
+Tongji University, China\\
+TU/e, Netherlands\\
+Email: filippobernardi@outlook.it}
+\and
+\IEEEauthorblockN{Snorri Stefánsson}
+\IEEEauthorblockA{University of Reykjavik, Iceland\\
+TU/e, Netherlands\\
+Email: snorriste@gmail.com}
+\and
+\IEEEauthorblockN{Jonas Wallmeier}
+\IEEEauthorblockA{Technical University Ilmenau, Germany\\
+TU/e, Netherlands\\
+Email: j.a.wallmeier@student.tue.nl}}
+
+% make the title area
+\maketitle
+
+\begin{abstract}
+Description of a wireless application for monitoring vital signs of plants and for supporting the user to maintain them alive. \\
+
+\end{abstract}
+
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+\hfill \today
+\\
+
+
+
+%(Application description and exact scenario including research and/or industrial motivation)
+\section{Application description}
+Keeping plants alive can be a very time consuming task: it requires knowledge about different types of plants as well as periodical checks if these requirements are fulfilled. 
+The main idea behind this application is to create a network of nodes, placed directly in the soil of each plant, that, connected to a main hub, helps the user to keep all the plants healthy. Moreover, each nodes has a series of sensor for measure some of the environmental index as example temperature or humidity. The main Hub received all the sensors data from each node and store them in a database. Furthermore, the hub elaborate data of each plants and check if they are acceptable for that type of plant. The costumer can easily access all the sensors information that are stored in the Hub and operate suitably.	\\
+This application is suitable for many type of buildings but in this paper it is described just in a flat operation. The plant monitor system should work in indoor and outdoor taking into account a monitor system that can work in a terrace that flat may have. Nevertheless, every node, even if monitor indoor plant, should be waterproof because are placed directly on the soil of the plant. However, in this paper we do not concern about the final case of the node and water resistant problematics.\\
+Each node apparatus, as already mention above, has to sense some index. In this paper we describe only the sensors available on sensor tag by Texas Instrument. In further development it could be added more sensors to the node.
+ \\
+ %Literature survey on similar applications (research or industry) and their solutions
+ 
+\section{similar applications}
+Nowadays, there are many plant monitoring system already available on the market. However, mostly of them use a smart phone as a host without creating a sensor network. The following solutions provide an overview of existing devices:\\
+\begin{enumerate}
+	\item growingEdyn 
+\end{enumerate}
+One application is growingEdyn, is composed by a device that has to be placed in the soil. The device has sensors for 
+
+
+\section{Design}
+\subsection{Sensor Node}
+The nodes have to be small in size to fit even in small plant pots. They should be battery powered and in order to be able to acquire the necessary data, they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with the Hub.
+
+Each sensor node should be able to measure the following:
+\begin{itemize}
+	\item Brightness
+	\item Temperature
+	\item Soil humidity
+	\item Air humidity
+	\item Ph-Value
+\end{itemize}
+However, a high sampling rate is not necessary and therefore keeping the sampling rate to a minimum increases battery life substantially. For the same reason it is advisable to decrease the transmission rate by only sending data upon significant change.
+
+\subsection{Hub}
+The Hub has to be able to collect all data provided from the nodes. It can be connected to the buildings power grid and Internet. A user interface (UI) should be digitally accessible via touchscreen, web page and/or app. Additionally the system should be able to inform the user about critical sensor values. To decide whether a value is critical or not, the Hub has to either know which type of plant the sensor monitors and then check a Internet database for specific requirements or rely on user defined values.
+
+
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+\begin{flushleft}
+	
+\section{Conclusion}
+	The authors hope that this system will help people maintain their apartment green.
+	The device described in this paper will be develop in  next two month creating a real prototype.
+\end{flushleft}
+
+\section{Bibliography}
+https://www.edyn.com/
+
+
+
+
+% that's all folks
+\end{document}
+
+
