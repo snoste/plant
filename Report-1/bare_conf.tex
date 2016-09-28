@@ -56,7 +56,8 @@
 
 
 \begin{document}
-\title{PLANTS\\Wireless Monitoring System}
+\title{PLANTS\\Scalable Wireless Plant Monitoring System\\ {\fontsize{13}{0}\selectfont 5LIC0 Networked embedded systems - Report 1 - Teacher: dr. M. Nabi Najafabadi Msc} \\ {\fontsize{13}{0}\selectfont September 11th, 2016}}
+
 
 \author{\IEEEauthorblockN{Filippo Bernardi}
 \IEEEauthorblockA{Bologna University, Italy\\
@@ -77,24 +78,28 @@ Email: j.a.wallmeier@student.tue.nl}}
 % make the title area
 \maketitle
 
+<<<<<<< HEAD
 \begin{abstract}
 Description of a wireless application for monitoring vital signs of plants and for supporting the user to maintain them alive. 
 \end{abstract}
+=======
+>>>>>>> refs/remotes/origin/master
 
 % For peerreview papers, this IEEEtran command inserts a page break and
 % creates the second title. It will be ignored for other modes.
 \IEEEpeerreviewmaketitle
 
-
+\begin{abstract}
+	Description of a wireless application for monitoring vital signs of plants and supporting the user to maintain them at good health.
+\end{abstract}
 
 \section{Introduction}
-Keeping plants alive can be a very time consuming task: it requires knowledge about different types of plants as well as periodical checks if these requirements are fulfilled. There for it would be much more convenient to have a single device which provides all the necessary information to keep all the plants healthy. This ''Hub'' gets the information wirelessly through a network of sensor nodes which can be placed directly in the soil of each plant.
- 
-\hfill \today
+Keeping plants alive can be a very time consuming task: it requires knowledge about different types of plants and their specific needs as well as periodical checks if their requirements are fulfilled. Therefore it would be much more convenient to have a single device which provides all the necessary information for keeping all the plants healthy. Such a device (Hub) gets this information wirelessly through a network of sensor nodes which can be placed directly in the soil of each plant. The sensor nodes should not have to rely on direct communication with the Hub, but also be able to forward other nodes' messages, creating a scalable wireless ad-hoc network for larger areas.
+% \hfill \today
 
 \section{Design}
 \subsection{Sensor Node}
-The nodes have to be small in size to fit even in small plant pots. They should be battery powered and in order to be able to acquire the necessary data, they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with the Hub.
+The nodes have to be small in size to fit even in small pots. They should be battery powered and in order to be able to acquire the necessary data, they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with other nodes.
 
 Each sensor node should be able to measure the following:
 \begin{itemize}
@@ -107,7 +112,11 @@ Each sensor node should be able to measure the following:
 However, a high sampling rate is not necessary and therefore keeping the sampling rate to a minimum increases battery life substantially. For the same reason it is advisable to decrease the transmission rate by only sending data upon significant change.
 
 \subsection{Hub}
+<<<<<<< HEAD
 The Hub has to be able to collect all data provided from the nodes. It can be connected to the buildings power grid and Internet. A user interface (UI) should be digitally accessible via touchscreen, web page and/or app. Additionally the system should be able to inform the user about critical sensor values. To decide whether a value is critical or not, the Hub has to either know which type of plant the sensor monitors and then check a Internet database for specific requirements or rely on user defined values.
+=======
+The Hub has to be able to collect all data provided from the nodes. It can be connected to the buildings power grid and internet. An user interface (UI) should be digitally accessible via touchscreen, webpage and/or app. Additionally the system should be able to inform the user about critical sensor values. To decide whether a value is critical or not, the Hub has to either know which type of plant the sensor monitors and then check a internet database for specific requirements or rely on user defined values.
+>>>>>>> refs/remotes/origin/master
 
 
 %\begin{figure}[!t]
@@ -149,6 +158,7 @@ The Hub has to be able to collect all data provided from the nodes. It can be co
 %\hline
 %\end{tabular}
 %\end{table}
+<<<<<<< HEAD
 \begin{flushleft}
 	
 \section{Conclusion}
@@ -158,8 +168,25 @@ The Hub has to be able to collect all data provided from the nodes. It can be co
 
 
 
+=======
+\section{Conclusion}
+
+
+The authors hope that this system will help people maintain their plants green and alive.
+The devices described in this paper will be developed within the next two months, including a working prototype of the systems described.
+
+
+%\begin{thebibliography}{1}
+
+%\bibitem{IEEEhowto:kopka}
+%H.~Kopka and P.~W. Daly, \emph{A Guide to \LaTeX}, 3rd~ed.\hskip 1em plus
+%  0.5em minus 0.4em\relax Harlow, England: Addison-Wesley, 1999.
+
+%\end{thebibliography}
+>>>>>>> refs/remotes/origin/master
 
 % that's all folks
 \end{document}
 
 
+\grid
