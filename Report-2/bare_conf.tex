@@ -106,13 +106,14 @@ There are many plant monitoring system already available on the market. However,
 This application is called Edyn, is composed by a device that has to be placed in the soil. Moreover, is has sensors for light, moisture, humidity and is able to inform its users about the nutrition status of the plant. There is a solar panel integrated on top of the device to power the device and charge its battery. The apparatus connects to a WiFi network and communicates with a smart phone via app where all the information is shown. The system uses a actuator, a automatic watering system, enabled upon information from its partner device.\\
 \item PlantLink\\
 PlantLink is a system which can sense the moisture of a plant and wirelessly communicate with a base station. This base station can be paired with up to 64 sensors nodes. There is a smartphone app that informs the users about the health levels of the plant. Each sensor is associated to a specific type of plant by the user and the system can then look up generic requirements for that plant and advice the user accordingly. The system also has a PlantLink valve, a specific actuator able to water the system automatically. The user can also control the actuator through the app if required. This application seems to be different from the amount of sensors in the system. Therefore, PlantLink is restricted to the humidity of the plant whereas the other solutions mentioned here provide multiple sensor values and meet more requirements of the users.\\
-%Snorri has read until here
+
 \item Parrot Flower Power\\
-this third application available on the market is composed by a sensors station that has to be placed directly on the soil of plant to monitoring. Does not have any actuator and so the user has to care about water the plant. The system is battery powered that can be easily changed and it also come with integrated light, moisture and temperature sensors. This device communicate just to a smart phone via bluetooth. All the information can be visible to the user using an app.
+This third application available on the market is composed of a device that has to be placed directly on the soil of plant to monitoring, like the others. It does not have any actuator and reports to the user via smart phone app. The system is battery powered that can be easily changed and it also come with integrated light, moisture and temperature sensors. This device communicates straight to a smart phone via bluetooth.
 \end{enumerate}
 
 \subsection{Conclusion of existing devices}
 
+The described solutions listed show the general purpose and requirements of a plant monitoring systems. User requirements are the most important aspect of each of these systems and have to be taken into account in the design. By looking at the those three systems, they all report the valuable information to the user in a comfortable way but some of them lack the off site connectivity and scalability of the amount of sensor nodes and range, which is vital for some plants in order for them to stay alive. 
 
 
 \section{Design}
@@ -127,6 +128,7 @@ Each sensor node should be able to measure the following:
 	\item Air humidity
 	\item Ph-Value
 \end{itemize}
+
 However, a high sampling rate is not necessary and therefore keeping the sampling rate to a minimum increases battery life substantially. For the same reason it is advisable to decrease the transmission rate by only sending data upon significant change.
 
 \subsection{Hub}
