@@ -43,7 +43,7 @@
 
 
 \documentclass[conference]{IEEEtran}
-\usepackage{cite}
+
 \usepackage[pdftex]{graphicx}
  % \graphicspath{{../pdf/}{../jpeg/}}
  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
@@ -53,6 +53,10 @@
 %\usepackage{url}
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
+\usepackage{biblatex}
+%\usepackage[colorlinks=true,allcolors=black]{hyperref}
+\usepackage[backend=biber, bibencoding=utf8, style=ieee]{biblatex}
+\addbibresource{references.bib}
 
 
 \begin{document}
@@ -179,6 +183,8 @@ Description of a wireless application for monitoring vital signs of plants and f
 	\item $http://electronicdesign.com/what-s-difference-between/what-s-difference-between-ieee-802154-and-zigbee-wireless$
 	
 \end{itemize}
+
+\printbibliography
 
 
 
