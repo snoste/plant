@@ -7,24 +7,42 @@ The wireless network system consists of a Hub and sensor nodes. After careful ex
 
 The General requirements for the node were design for durability, optimal functionality and user friendly application. This sensor application requires many precise design parameters from the node but those can not all be satisfied. Thus, the general requirements will be discussed and then shown how well the TI sensor tag fulfills them and how it could be added. With the time scope of the project, some of these requirements will not be met, rather a focus will be but on functionality of current components.
 
-\subsubsection{General node requirements}
+Im general the nodes have to be small in size to fit even in small plant pots. They should be battery powered and in order to be able to acquire the necessary data, they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with the Hub.
 
-The nodes have to be small in size to fit even in small plant pots. They should be battery powered and in order to be able to acquire the necessary data, they need to have sensors in and above the soil. Moreover, the nodes should be waterproof, contain a status-LED and a RF-module for wireless communication with the Hub.
+Each sensor node should be able to measure the items listed in Table \ref{list-req} and if the sensor tag fulfills them or not.
+\begin{table}[htbp]
+	\centering
+	\begin{tabular}{lc}
+		\toprule
+		Requirements & \multicolumn{1}{l}{TI sensor tag} \\ 
+		\midrule
+		Brightness & yes \\ 
+		Temperature & yes \\ 
+		Soil humidity & no \\ 
+		Air humidity & yes \\ 
+		Soil Ph-value & no \\
+		\bottomrule 
+	\end{tabular}
+	\vspace{0.1cm}
+	\caption{Requirement compared to the capabilities of the TI sensor tag}
+	\label{list-req}
+\end{table}
 
-Each sensor node should be able to measure the following:
-\begin{itemize}
-	\item Brightness 
-	\item Temperature
-	\item Soil humidity
-	\item Air humidity
-	\item Ph-Value
-\end{itemize}
 
+A high sampling rate is not necessary and therefore keeping the sampling rate to a minimum increases battery life substantially. For the same reason it is advisable to decrease the transmission rate by only sending data upon significant change.
 
+\subsubsection{Detailed hardware design}
 
-However, a high sampling rate is not necessary and therefore keeping the sampling rate to a minimum increases battery life substantially. For the same reason it is advisable to decrease the transmission rate by only sending data upon significant change.
+The sensor tag from TI can measure many things which are useful for the project and was chosen were it also offers various connection methods via BLE, Zigbee, 6LowWPAN and soon wifi. Its battery lasts a year with one second report intervals and is easily replaceable be the user. 
 
-\subsubsection{}
+The multi-standard processor, CC2560 \cite{block-cc2650}, connects to ten low power MEMS (Microelectromechanical systems) \cite{MEMS} sensors seen in Figure \ref{fig:sensors}. This makes it possible to be extremely small (micrometers), light weight, mobile and robust.
+
+\begin{figure}[!h]
+	\includegraphics[width=\linewidth]{sensors-layout}
+	\caption{Block diagram of the MEMSs sensors and the CC2650 processor \cite{block-cc2650}.}
+	\label{fig:sensors}
+\end{figure}
+
 
 \subsection{Hub - Raspberry Pi 3}
 The Hub has to be able to collect all data provided from the nodes. It can be connected to the buildings power grid and Internet. A user interface (UI) should be digitally accessible via touchscreen, web page and/or app. Additionally the system should be able to inform the user about critical sensor values. To decide whether a value is critical or not, the Hub has to either know which type of plant the sensor monitors and then check a Internet database for specific requirements or rely on user defined values.
