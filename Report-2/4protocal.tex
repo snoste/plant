@@ -19,7 +19,20 @@ In order to combine the advantages of both, CSMA and TDMA, the hybrid Z-MAC appr
 
 \subsection{Design of Z-MAC}
 \subsubsection{General Idea}
-Z-MAC aims to combine advantages of CSMA and TDMA. To achieve this, Z-MAC uses time frames which are divided into slots, just like in TDMA. However, while each node still owns one slot, they are also allowed to transmit data in slots they do not own. To avoid collisions CSMA mechanism are used before transmission with the slight adaption, that the contention window is much smaller if a node transmits in its own slot compared to transmission in other slots. This way we can achieve high channel utilization even if some nodes are more active than others, while multi-hop transmission is still possible.
+Z-MAC aims to combine advantages of CSMA and TDMA. To achieve this, Z-MAC uses time frames which are divided into slots, just like in TDMA. However, while each node still owns one slot, they are also allowed to transmit data in slots they do not own. To avoid collisions CSMA mechanism are used before transmission with the slight adaption, that the contention window is much smaller if a node transmits in its own slot compared to transmission in other slots. This way we can achieve high channel utilization even if some nodes are more active than others, while multi-hop transmission is still possible.\cite{rhee2008z}
+
 \subsubsection{Slot Assignment}
+%TODO: second phase name?
+Z-MAC consists of two phases: setup and working phase. The setup phase is needed to discover the network topology and assign slots to nodes. Therefore the setup phase should be issued the very first time the system starts and every time there are major changes in the network's topology.\\
+It is important for each node to know his one- and two-hop neighbours. Therefore, during setup phase, each node broadcasts a list of its neigbours once per second for thirty seconds. After that, each node chooses one slot as his own using the DRAND (Distributed RAND Algorithm). Once this is done the system is ready to switch to
+%TODO: Add second phase name and delete linefeeds
+phase.
+
+\subsubsection{Z-MAC Transmission Control}
+A node can be in \textit{low contention level} (LCL) or \textit{high contention level} (HCL) mode. By default it is in LCL mode and will only be in HCL if it received an \textit{explicit contention notification} (ECN) message from a one- or two-hop neighbour within the last $t_{ECN}$ period. If a Node is in LCL mode, it is allowed to send at any time slot, following CSMA. In HCL mode only owners of the current slot and their one-hop neighbours are allowed to send at a given time. In order for this to work, each node has to estimate the current contention level of the channel and based on that decide to send ECN messages.
+
+\subsubsection{Z-MAC Reception Control}
+Since Z-MAC is based on B-MAC, it also features listening duty cycles seperated by check periods. Furthermore, each transmission is preceded by a preamble as long as the check period.
+
 \subsubsection{Synchronization}
-\subsubsection{Explicit Contention Messages}
+Whenever different nodes want to use different time slots in one frame, they need to synchronize to slot 0. This is achieved by performing global clock synchronization (such as TPSN) in the beginning and later using a low-cost local synchronization protocol. In the case of Z-MAC, synchronization is only needed in HCL mode and only locally, since Z-MAC works just like regular CSMA under low-traffic conditions and HCL is limited to two-hop neighbours.
