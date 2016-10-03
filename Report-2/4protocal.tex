@@ -1,0 +1,25 @@
+\section{Implemented MAC-Layer}
+\subsection{MAC Requirements}
+For choosing the best suited MAC-Layer for the system, the following requirements have to be considered:
+
+\begin{itemize}
+	\item \textbf{Datarate:}
+	Low. All that has to be transmitted by the plants are some sensor values. Therefore a low datarate is sufficient.
+	\item \textbf{Network Size:}
+	Big. All Nodes have to be connected to the Hub. In order for the system to be able to operate in small apartments as well as in big factory plants, it should provide multihop capabilities.
+	\item \textbf{Energy Consumption:}
+	Very Low. The system consists of several battery powered nodes that can be spread over a large area. Therefore, changing batteries can be very time consuming and should be made as avoidable as possible.
+	\item \textbf{Latency:}
+	Uncritical. The monitored values are usually changing relatively slow so that real-time measuring is not necessary.
+\end{itemize}
+
+While CSMA-Approaches are usually a good choice for low-traffic, multi-hop networks always require some kind of synchronization to work energy efficient, which is not provided by CSMA.\\
+TDMA-Approaches on the other hand are easily usable for multi-hop networks. However, TDMA is relatively inflexible to a changing network topology and generally a bad choice for low-traffic networks.\\
+In order to combine the advantages of both, CSMA and TDMA, the hybrid Z-MAC approach was specifically designed for Wireless Sensor Networks.
+
+\subsection{Design of Z-MAC}
+\subsubsection{General Idea}
+Z-MAC aims to combine advantages of CSMA and TDMA. To achieve this, Z-MAC uses time frames which are divided into slots, just like in TDMA. However, while each node still owns one slot, they are also allowed to transmit data in slots they do not own. To avoid collisions CSMA mechanism are used before transmission with the slight adaption, that the contention window is much smaller if a node transmits in its own slot compared to transmission in other slots. This way we can achieve high channel utilization even if some nodes are more active than others, while multi-hop transmission is still possible.
+\subsubsection{Slot Assignment}
+\subsubsection{Synchronization}
+\subsubsection{Explicit Contention Messages}
