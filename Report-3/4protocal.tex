@@ -1,0 +1,38 @@
+\section{Implemented MAC-Layer}
+\subsection{MAC Requirements}
+For choosing the best suited MAC-Layer for the system, the following requirements have to be considered:
+
+\begin{itemize}
+	\item \textbf{Datarate:}
+	Low. All that has to be transmitted by the plants are some sensor values. Therefore a low datarate is sufficient.
+	\item \textbf{Network Size:}
+	Big. All Nodes have to be connected to the Hub. In order for the system to be able to operate in small apartments as well as in large buildings, it should provide multihop capabilities.
+	\item \textbf{Energy Consumption:}
+	Very Low. The system consists of several battery powered nodes that can be spread over a large area. Therefore, changing batteries can be very time consuming and should be made as avoidable as possible.
+	\item \textbf{Latency:}
+	Uncritical. The monitored values are usually changing relatively slow so that real-time measuring is not necessary.
+\end{itemize}
+
+While CSMA-Approaches are usually a good choice for low-traffic, multi-hop networks always require some kind of synchronization for making it energy efficient, which is not provided by CSMA.\\
+TDMA-Approaches on the other hand are easily applied in multi-hop networks. However, TDMA is relatively inflexible to a changing network topology and generally a bad choice for low-traffic networks.\\
+In order to combine the advantages of both, CSMA and TDMA, the hybrid Z-MAC approach was specifically designed for Wireless Sensor Networks with these requirements.
+
+\subsection{Design of Z-MAC}
+\subsubsection{General Idea}
+Z-MAC aims to combine advantages of CSMA and TDMA. To achieve this, Z-MAC uses time frames which are divided into slots, just like in TDMA. However, while each node still owns one slot, they are also allowed to transmit data in slots they do not own. To avoid collisions CSMA mechanism are used before transmission with the slight adaption, that is, the contention window is much smaller if a node transmits in its own slot compared to transmission in other slots. Therefore achieving high channel utilization even if some nodes are more active than others, while multi-hop transmission is still possible.\cite{rhee2008z}
+
+\subsubsection{Slot Assignment}
+%TODO: second phase name?
+Z-MAC consists of two phases: setup and working phase. The setup phase is needed to discover the network topology and assign slots to nodes. Therefore the setup phase should be issued the very first time the system starts and every time there are major changes in the network's topology.\\
+It is important for each node to know his one- and two-hop neighbours. Therefore, during setup phase, each node broadcasts a list of its neigbours once per second for thirty seconds. After that, each node chooses one slot as his own using the DRAND (Distributed RAND Algorithm). Once this is done the system is ready to switch to
+%TODO: Add second phase name and delete linefeeds
+phase.
+
+\subsubsection{Z-MAC Transmission Control}
+A node can be in \textit{low contention level} (LCL) or \textit{high contention level} (HCL) mode. By default it is in LCL mode and will only be in HCL if it received an \textit{explicit contention notification} (ECN) message from a one- or two-hop neighbors within the last $t_{ECN}$ period. If a Node is in LCL mode, it is allowed to send at any time slot, following CSMA. In HCL mode only owners of the current slot and their one-hop neighbors are allowed to send at a given time. In order for this to work, each node has to estimate the current contention level of the channel and based on that decide to send ECN messages.
+
+\subsubsection{Z-MAC Reception Control}
+Since Z-MAC is based on B-MAC, it also features listening duty cycles separated by check periods. Furthermore, each transmission is preceded by a preamble as long as the check period.
+
+\subsubsection{Synchronization}
+Whenever separate nodes want to use different time slots in one frame, they need to synchronize to slot 0. This is achieved by performing global clock synchronization (such as TPSN) in the beginning and later using a low-cost local synchronization protocol. In the case of Z-MAC, synchronization is only needed in HCL mode and only locally, since Z-MAC works just like regular CSMA under low-traffic conditions and HCL is limited to two-hop neighbors.

@@ -1,0 +1,188 @@
+
+%% bare_conf.tex
+%% V1.4b
+%% 2015/08/26
+%% by Michael Shell
+%% See:
+%% http://www.michaelshell.org/
+%% for current contact information.
+%%
+%% This is a skeleton file demonstrating the use of IEEEtran.cls
+%% (requires IEEEtran.cls version 1.8b or later) with an IEEE
+%% conference paper.
+%%
+%% Support sites:
+%% http://www.michaelshell.org/tex/ieeetran/
+%% http://www.ctan.org/pkg/ieeetran
+%% and
+%% http://www.ieee.org/
+
+%%*************************************************************************
+%% Legal Notice:
+%% This code is offered as-is without any warranty either expressed or
+%% implied; without even the implied warranty of MERCHANTABILITY or
+%% FITNESS FOR A PARTICULAR PURPOSE! 
+%% User assumes all risk.
+%% In no event shall the IEEE or any contributor to this code be liable for
+%% any damages or losses, including, but not limited to, incidental,
+%% consequential, or any other damages, resulting from the use or misuse
+%% of any information contained here.
+%%
+%% All comments are the opinions of their respective authors and are not
+%% necessarily endorsed by the IEEE.
+%%
+%% This work is distributed under the LaTeX Project Public License (LPPL)
+%% ( http://www.latex-project.org/ ) version 1.3, and may be freely used,
+%% distributed and modified. A copy of the LPPL, version 1.3, is included
+%% in the base LaTeX documentation of all distributions of LaTeX released
+%% 2003/12/01 or later.
+%% Retain all contribution notices and credits.
+%% ** Modified files should be clearly indicated as such, including  **
+%% ** renaming them and changing author support contact information. **
+%%*************************************************************************
+
+
+\documentclass[conference]{IEEEtran}
+
+\usepackage[pdftex]{graphicx}
+ % \graphicspath{{../pdf/}{../jpeg/}}
+ % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{amssymb}
+\usepackage{wasysym}
+
+%\usepackage{algorithmic}
+%\usepackage{array}
+%\usepackage{url}
+% correct bad hyphenation here
+\hyphenation{op-tical net-works semi-conduc-tor}
+
+\usepackage{biblatex}
+\usepackage[colorlinks=true,allcolors=black]{hyperref}
+%\usepackage[backend=biber, bibencoding=utf8, style=ieee]{biblatex}
+\addbibresource{references.bib}
+
+
+\begin{document}
+\title{Report 2\\Related Work and Design}
+
+\author{\IEEEauthorblockN{Filippo Bernardi}
+\IEEEauthorblockA{Bologna University, Italy\\
+Tongji University, China\\
+TU/e, Netherlands\\
+Email: filippobernardi@outlook.it}
+\and
+\IEEEauthorblockN{Snorri Stefansson}
+\IEEEauthorblockA{University of Reykjavik, Iceland\\
+TU/e, Netherlands\\
+Email: snorriste@gmail.com}
+\and
+\IEEEauthorblockN{Jonas Wallmeier}
+\IEEEauthorblockA{Technical University Ilmenau, Germany\\
+TU/e, Netherlands\\
+Email: j.a.wallmeier@student.tue.nl}}
+
+% make the title area
+\maketitle
+
+\begin{abstract}
+Description of a wireless application for monitoring vital signs of plants and for supporting the user to maintain them alive. \\
+
+\end{abstract}
+
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+\hfill \today
+\\
+
+%Application description and exact scenario including research and/or industrial motivation
+
+%Literature survey on similar applications (research or industry) and their solutions
+
+
+%Intended protocol stack and justification for tha
+
+%Network architecture options
+
+%The method and tools for implementation (simulation, hardware platform, ...)
+
+%Hardware/software implementation plan
+
+%I but this here to prevent the pagebreaks inbetween the include{file} :) happy happy hippo filippo
+\begingroup
+\let\clearpage\relax
+%(Application description and exact scenario including research and/or industrial motivation)
+\include{1app-des}
+
+%Literature survey on similar applications (research or industry) and their solutions
+\include{2lit-surv}
+ 
+%Detailed hardware setup (processor, RF, sensors, battery, memory, etc.)
+\include{3hardw-setup}
+
+\include{4protocal}
+
+\include{5netw-arch-options}
+\include{6method-impl}
+
+\include{7hardw-softw-plan}
+\endgroup
+
+
+
+%\begin{figure}[!t]
+%\centering
+%\includegraphics[width=2.5in]{myfigure}
+% where an .eps filename suffix will be assumed under latex, 
+% and a .pdf suffix will be assumed for pdflatex; or what has been declared
+% via \DeclareGraphicsExtensions.
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure}
+
+%\begin{figure*}[!t]
+%\centering
+%\subfloat[Case I]{\includegraphics[width=2.5in]{box}%
+%\label{fig_first_case}}
+%\hfil
+%\subfloat[Case II]{\includegraphics[width=2.5in]{box}%
+%\label{fig_second_case}}
+%\caption{Simulation results for the network.}
+%\label{fig_sim}
+%\end{figure*}
+
+%\begin{table}[!t]
+%% increase table row spacing, adjust to taste
+%\renewcommand{\arraystretch}{1.3}
+% if using array.sty, it might be a good idea to tweak the value of
+% \extrarowheight as needed to properly center the text within the cells
+%\caption{An Example of a Table}
+%\label{table_example}
+%\centering
+%% Some packages, such as MDW tools, offer better commands for making tables
+%% than the plain LaTeX2e tabular which is used here.
+%\begin{tabular}{|c||c|}
+%\hline
+%One & Two\\
+%\hline
+%Three & Four\\
+%\hline
+%\end{tabular}
+%\end{table}
+
+	
+\section{Conclusion}
+	The device described in this paper will be develop in  next two month creating a real prototype.
+	
+
+
+\printbibliography
+
+
+% that's all folks
+\end{document}
+
+
+\grid
