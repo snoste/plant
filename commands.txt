@@ -1,0 +1,29 @@
+//connect to pi
+ssh -x pi@192.168.0.101
+
+// 6LBR -> 
+// -Start Raspi without TelosB
+// -Stop service
+// -Delete all /var/log/6lbr.*
+// -Start service
+// -Connect TelosB
+// -Check if 6lbr.ip exists (should contain bbbb::100)
+service 6lbr stop
+service 6lbr start
+service 6lbr status
+cat /var/log/6lbr.log
+cat /var/log/6lbr.ip
+
+// Get gcc arm crosscompiler gcc-arm-none-eabi
+sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa
+sudo apt-get update
+sudo apt-get install gcc-arm-embedded
+
+// Disable BLE in project-conf.h
+#define RF_BLE_CONF_ENABLED 0
+
+// Make Binary
+make TARGET=srf06-cc26xx BOARD=sensortag/cc2650 cc26xx-web-demo.bin CPU_FAMILY=cc26xx
+
+//contiki compiler
+sudo apt-get install gcc-msp430
