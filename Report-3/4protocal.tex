@@ -1,14 +1,12 @@
 \section{Protocol stack}
 \subsection{Overview}
-The main idea of all system is to create an interface between the wireless sensor network that work via IEEE 802.15.4 and the Internet. This link, made by the raspberry pi, is needed because the data that has to be sense by the wireless sensor network it is needed to be available on a web page for let the user analyze them. 
-
+The main idea of all system is to create an interface between the wireless sensor network that work via IEEE 802.15.4 and the Internet. This link, made by the raspberry pi, is needed because the data that has to be sense by the wireless sensor network it is needed to be available on a web page for let the user analyze them. \\
 \subsection{IEEE 802.15.4}
-IEEE 802.15.4 is a standard used for Low-power wireless Personal Area Networks (LP-WPANs). It covers physical and media access control layers and there has been released three versions, the first in 2003 and the others in 2006 and 2007 respectively.
-\subsubsection{phy characteristic}
-In IEEE 802.15.4 the Physical layer operates in 27 channels: 1 in 868MHz, 10 in 902MHz and 16 in 2.4GHz frequency. The data transfer rate up to 250 Kbps.\cite{slide}\\
+IEEE 802.15.4 is a standard used for Low-power wireless Personal Area Networks (LP-WPANs). It covers physical and media access control layers and there has been released three versions, the first in 2003 and the others in 2006 and 2007 respectively.,,
+In IEEE 802.15.4 the Physical layer operates in 27 channels: 1 in 868MHz, 10 in 902MHz and 16 in 2.4GHz frequency. The data transfer rate is up to 250 Kbps.\cite{slide}\\
 \subsection{Network Topologies}
 In this section, the network architecture of a plant monitoring system will be discussed. \\
-Firstly, the IEEE 802.15.4 regulation define two main types of node: the Full Function Device (FFD) and Reduced Function Device (RFD). The RFD differ from the other because is a device with reduced function capabilities, is not able to forward data from one node to another but also cannot be a coordinator for the other node of the network. Therefore, is a device with less resourced that can only send messages to other node. The final network will be composed by a main FFD also called Pan coordinator, other Full Function Devices named co-coordinator and all the other RFD denominated End device. \cite{802-15-4} \\
+Firstly, the IEEE 802.15.4 regulation define two main types of node: the Full Function Device (FFD) and Reduced Function Device (RFD). The RFD differ from the other because is a device with reduced function capabilities, is not able to forward data from one node to another but also cannot be a coordinator for the other node of the network. Therefore, is a device with less resourced that can only send messages to other node. The final network will be composed by a main FFD also called Pan coordinator, other Full Function Devices named co-coordinator and all the other RFD denominated End device. \cite{802154} \\
 Secondly, the standard define some topology configuration of a network. The most simple one is the star topology. It is composed by a central pan coordinator that is connected with all other devices. Each device sends data to the pan coordinator and no need to have a node that forwards messages. Moreover, in this type of architecture there are not any node dependence to let data arrive to the main hub.\\
 Another type is the tree topology. This has the peculiarity of having a family group of node that send data to a central co-coordinator node which in turn froward the messages to the Pan coordinator. It differ from the previous one by the range of communication that the overall network is able to exploit.
 Finally, the peer-to-peer communication is an ad hoc network system where most of the node are FFD. Therefore, each node has not only a central co-coordinator node as it was in tree topology but in here, all the nodes are interconnected with each other creating a network of communication. This system is more reliable from the previous one because, in case of failure of a co-coordinator node, in the previous case we lose all the family of node connected to it. In peer-to-peer, the network is able to re-adapt to this failure using the other communication channel. \cite{slide}\\
@@ -35,12 +33,14 @@ TDMA-Approaches on the other hand are easily applied in multi-hop networks. Howe
 In IEEE 802.15.4 a CSMA/CA is used. The protocol works as follows:
 the sender wait until the channel is idle, if it is the case it wait for a random back-off period and then it send the data. The receiver send back an ack if the data where correctly received. Naturally, if the sender do not sense the ack packet, it start to send again the data.\cite{slide}\\
 
-\subsection{slotted and un-slotted CSMA}
-%TODO write about slotted and unslotted csma?
+\subsection{un-slotted CSMA}
+In IEEE 802.15.4 it is possible to use a slotted and un-slotted CSMA procedure. The un-slotted procedure is as follow: after an initialization phase, there is a random back-off period. Moreover, after makes CCA, it is cheked if the channel is idle or not. If is idle the procedure success otherwise it is makes the backoff and channel clear assessment until the channel is idle or the backoff procedure has reached the maximum allowed times causing a failure in the procedure.\cite{slide}\\
+
 
 \subsection{6LowPAN}
-6LowPAN stands for ipv6 over Low Power Wireless Personal Area Networks and it is placed up to the IEEE 802.15.4 protocol. Ipv6 is the new type of Internet protocol and it has been made for handle the increasing amount of devices that are connected to the Internet by using a different type of ID.\cite{6lowpan}\\
-This standards has been developed for allowing embedded devices of being able to use the ipv6.\cite{why}
+6LowPAN stands for IPv6 over Low Power Wireless Personal Area Networks and it is placed up to the IEEE 802.15.4 protocol. Ipv6 is the new type of Internet protocol and it has been made for handle the increasing amount of devices that are connected to the Internet by using a different type of ID.\cite{6lowpan}\\
+6LowPAN standards has been developed for allowing embedded devices of being able to use the IPv6.\cite{why}
 The main advantage of having an IP in a 802.15.4 device is allowing a node to be able to use directly to an IP network without the use of any other interface. Moreover, a node with an IP is able to use already build infrastructure.\cite{6lowpan} This gives the main concept of IoT, Internet of Things. 
-The problem in 6lowpan is the difference packet size between the IEEE 802.15.4 and the ipv6 packet size. In the first the packet has a size of 102 bytes because it is 127 in total minus the 25 bytes of frame overhead. In ipv6 the packet length is of 1280. This means that it is necessary a fragmentation and reassembly of the packet for letting a ipv6 packet fit inside a IEEE 802.15.4 frame. Moreover, it is also needed of the compression of header field.\cite{slide} \cite{6lowpan}\\
-To conclude, the 6LowPAN is based on IEEE 802.15.4 standard where a un-slotted CSMA/CA is used. The node architecture used is mesh type. \cite{6lowpan}\\
+However, there is  problem in 6lowpan: the difference packet size between the IEEE 802.15.4 and the IPv6 packet size. In the first the packet has a size of 102 bytes because it is 127 in total minus the 25 bytes of frame overhead. In IPv6 the packet length is of 1280. This means that it is necessary a fragmentation and reassembly of the packet for letting a IPv6 packet fit inside a IEEE 802.15.4 frame. Moreover, it is also needed of the compression of header field.\cite{slide} \cite{6lowpan}\\
+To conclude, the 6LowPAN is based on IEEE 802.15.4 standard where a un-slotted CSMA/CA is used. The node architecture used is mesh type. \cite{6lowpan}
+This protocol allow the plant monitoring system wireless sensor network described in this paper, to be attached to an existing IPv6 network.
