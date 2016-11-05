@@ -1,3 +1,8 @@
-\section{The method and tools for implementation}
-The system will be developed at Eindhoven University of Technology. There will be created a real prototype composed by a main hub composed of a Raspberry Pi via serial to a Xbee module. For the sensors node, Sensors-Tag by Texas Instrument will be used. There will be at least two sensor tags operating in the system along with the Hub. The main purpose of this project is to create a network of nodes. Therefore, the number of nodes connected to the hub is not a concern the the developers. For the sake of simplicity, no other sensors will be added to the Sensor tag despite the fact that for a perfect monitoring of a plant other sensors would be needed (e.g. Moisture Sensor).\\
-For the User Interface a WebUI will be created. It will be hosted on the Raspberry Pi board and will be accessible by anyone with the website URL.
+\section{Development}
+\subsection{flashing the Texas Instrument Sensor-Tag}
+In order to flash the sensor tag, SmartRF Flash Programmer 2 made by Texas Instrument has been used. For flashing the node a sensor tag needs a Debugger DevPack, the debugger allow to communicate to the sensor via USB as it is shown in the picture \ref{fig:debugger}. 
+\begin{figure}[!h]
+	\includegraphics[width=\linewidth]{debugger}
+	\caption{sensor node connected with the debugger to a computer}
+	\label{fig:debugger}
+\end{figure}
