@@ -35,29 +35,12 @@ TDMA-Approaches on the other hand are easily applied in multi-hop networks. Howe
 In IEEE 802.15.4 a CSMA/CA is used. The protocol works as follows:
 the sender wait until the channel is idle, if it is the case it wait for a random back-off period and then it send the data. The receiver send back an ack if the data where correctly received. Naturally, if the sender do not sense the ack packet, it start to send again the data.\cite{slide}\\
 
-
-
-
+\subsection{slotted and un-slotted CSMA}
+%TODO write about slotted and unslotted csma?
 
 \subsection{6LowPAN}
-
-
-\subsection{Design of Z-MAC}
-\subsubsection{General Idea}
-Z-MAC aims to combine advantages of CSMA and TDMA. To achieve this, Z-MAC uses time frames which are divided into slots, just like in TDMA. However, while each node still owns one slot, they are also allowed to transmit data in slots they do not own. To avoid collisions CSMA mechanism are used before transmission with the slight adaption, that is, the contention window is much smaller if a node transmits in its own slot compared to transmission in other slots. Therefore achieving high channel utilization even if some nodes are more active than others, while multi-hop transmission is still possible.\cite{rhee2008z}
-
-\subsubsection{Slot Assignment}
-%TODO: second phase name?
-Z-MAC consists of two phases: setup and working phase. The setup phase is needed to discover the network topology and assign slots to nodes. Therefore the setup phase should be issued the very first time the system starts and every time there are major changes in the network's topology.\\
-It is important for each node to know his one- and two-hop neighbours. Therefore, during setup phase, each node broadcasts a list of its neigbours once per second for thirty seconds. After that, each node chooses one slot as his own using the DRAND (Distributed RAND Algorithm). Once this is done the system is ready to switch to
-%TODO: Add second phase name and delete linefeeds
-phase.
-
-\subsubsection{Z-MAC Transmission Control}
-A node can be in \textit{low contention level} (LCL) or \textit{high contention level} (HCL) mode. By default it is in LCL mode and will only be in HCL if it received an \textit{explicit contention notification} (ECN) message from a one- or two-hop neighbors within the last $t_{ECN}$ period. If a Node is in LCL mode, it is allowed to send at any time slot, following CSMA. In HCL mode only owners of the current slot and their one-hop neighbors are allowed to send at a given time. In order for this to work, each node has to estimate the current contention level of the channel and based on that decide to send ECN messages.
-
-\subsubsection{Z-MAC Reception Control}
-Since Z-MAC is based on B-MAC, it also features listening duty cycles separated by check periods. Furthermore, each transmission is preceded by a preamble as long as the check period.
-
-\subsubsection{Synchronization}
-Whenever separate nodes want to use different time slots in one frame, they need to synchronize to slot 0. This is achieved by performing global clock synchronization (such as TPSN) in the beginning and later using a low-cost local synchronization protocol. In the case of Z-MAC, synchronization is only needed in HCL mode and only locally, since Z-MAC works just like regular CSMA under low-traffic conditions and HCL is limited to two-hop neighbors.
+6LowPAN stands for ipv6 over Low Power Wireless Personal Area Networks and it is placed up to the IEEE 802.15.4 protocol. Ipv6 is the new type of Internet protocol and it has been made for handle the increasing amount of devices that are connected to the Internet by using a different type of ID.\cite{6lowpan}\\
+This standards has been developed for allowing embedded devices of being able to use the ipv6.\cite{why}
+The main advantage of having an IP in a 802.15.4 device is allowing a node to be able to use directly to an IP network without the use of any other interface. Moreover, a node with an IP is able to use already build infrastructure.\cite{6lowpan} This gives the main concept of IoT, Internet of Things. 
+The problem in 6lowpan is the difference packet size between the IEEE 802.15.4 and the ipv6 packet size. In the first the packet has a size of 102 bytes because it is 127 in total minus the 25 bytes of frame overhead. In ipv6 the packet length is of 1280. This means that it is necessary a fragmentation and reassembly of the packet for letting a ipv6 packet fit inside a IEEE 802.15.4 frame. Moreover, it is also needed of the compression of header field.\cite{slide} \cite{6lowpan}\\
+To conclude, the 6LowPAN is based on IEEE 802.15.4 standard where a un-slotted CSMA/CA is used. The node architecture used is mesh type. \cite{6lowpan}\\
