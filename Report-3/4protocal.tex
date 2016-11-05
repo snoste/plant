@@ -1,6 +1,6 @@
 \section{Protocol stack}
 \subsection{Overview}
-The main idea of all system is to create an interface between the wireless sensor network that work via IEEE 802.15.4 and the Internet. This link, made by the raspberry pi, is needed because all the data sense from the nodes will be available on a web page to the user. 
+The main idea of all system is to create an interface between the wireless sensor network that work via IEEE 802.15.4 and the Internet. This link, made by the raspberry pi, is needed because the data that has to be sense by the wireless sensor network it is needed to be available on a web page for let the user analyze them. 
 
 \subsection{IEEE 802.15.4}
 IEEE 802.15.4 is a standard used for Low-power wireless Personal Area Networks (LP-WPANs). It covers physical and media access control layers and there has been released three versions, the first in 2003 and the others in 2006 and 2007 respectively.
@@ -34,6 +34,7 @@ While CSMA-Approaches are usually a good choice for low-traffic, multi-hop netwo
 TDMA-Approaches on the other hand are easily applied in multi-hop networks. However, TDMA is relatively inflexible to a changing network topology and generally a bad choice for low-traffic networks.\\
 In IEEE 802.15.4 a CSMA/CA is used. The protocol works as follows:
 the sender wait until the channel is idle, if it is the case it wait for a random back-off period and then it send the data. The receiver send back an ack if the data where correctly received. Naturally, if the sender do not sense the ack packet, it start to send again the data.\cite{slide}\\
+
 
 
 
