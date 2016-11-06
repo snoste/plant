@@ -109,3 +109,15 @@ make TARGET=sky slip-radio.upload
 #define NETSTACK_CONF_NETWORK slipnet_driver
 #define NETSTACK_CONF_FRAMER  no_framer
 \end{lstlisting}
+
+\subsection{Assembly of components}
+
+When assembling the components there is a 6loWPAN network of sensor nodes that can talk to each other and have one main cooardinator, namely the Pi which is now a border router to the network and hosts a website where all devices connected to the router can observe. To show the functionality of the mesh network see Figure \ref{fig:Mesh} where some different routes were made by the sensor tags in different situations.
+
+\begin{figure}[!h]
+	\begin{center} 	
+		\includegraphics[width=0.8\linewidth]{mesh}
+		\caption{sensor node connected with the debugger to a computer}
+		\label{fig:Mesh}
+	\end{center}
+\end{figure} 
