@@ -1,19 +1,96 @@
-//connect to pi
+/*****************************************************SSH*****************************************************/
 ssh -x pi@192.168.0.101
 
-// 6LBR -> 
-// -Start Raspi without TelosB
-// -Stop service
-// -Delete all /var/log/6lbr.*
-// -Start service
-// -Connect TelosB
-// -Check if 6lbr.ip exists (should contain bbbb::100)
+/*****************************************************IPv6****************************************************/
+//Set connection type to tunnel 6to4
+//Set router Address Auto-Configuration Type RADVD 
+//Enable IPv6 for Raspi folllowing:
+http://weblog.aklmedia.nl/tag/raspberry-pi/
+
+/*****************************************************VNC*****************************************************/
+enable VNC in raspi-config
+start server with 'startvnc'
+Access with RealVNC viewer
+
+
+/*********************************************6LBR BOARDER ROUTER*********************************************/
+Install latest 6LBR software on Raspberry
+Configure as Smart Bridge: 
+https://github.com/cetic/6lbr/wiki/6LBR-Modes
+https://github.com/cetic/6lbr/wiki/6LBR-Interface-Configuration
+
+	//FILE: /etc/6lbr/6lbr.conf
+		MODE=SMART-BRIDGE
+		RAW_ETH=0
+		BRIDGE=1
+		CREATE_BRIDGE=0 #FOR BRIDGE
+		DEV_BRIDGE=br0
+		DEV_TAP=tap0
+		DEV_ETH=eth0
+		DEV_RADIO=/dev/ttyUSB0
+		BAUDRATE=115200
+		LOG_LEVEL=3 #INFO and above only
+	//EOF
+	//FILE: /etc/network/interfaces
+		auto lo
+		iface lo inet loopback
+		iface eth0 inet static
+		address 0.0.0.0
+		auto br0
+		iface br0 inet dhcp
+		bridge_ports eth0
+		bridge_stp off
+		up echo 0 > /sys/devices/virtual/net/br0/bridge/multicast_snooping
+		post-up ip link set br0 address `ip link show eth0 | grep ether | awk '{pri$
+		allow-hotplug wlan0
+		iface wlan0 inet manual
+		wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
+		iface default inet dhcp
+	//EOF
+
+//Start,Stop,Restart  6LBR using:
 service 6lbr stop
 service 6lbr start
 service 6lbr status
+
+//Check status and ip-address:
 cat /var/log/6lbr.log
 cat /var/log/6lbr.ip
 
+/************************************************CONTIKI_LBR********************************************************/
+//For TelosB Sky-Mote (NOT SURE ABOUT THAT PART!)
+cd contiki/examples/ipv6/slip-radio
+in project-conf.h
+	#define NETSTACK_CONF_MAC     nullmac_driver
+	#define NETSTACK_CONF_RDC     contikimac_driver
+	#define NETSTACK_CONF_NETWORK slipnet_driver
+	#define NETSTACK_CONF_FRAMER no_framer
+
+connect the device
+make TARGET=sky slip-radio.upload
+
+
+/**********************************************CONTIKI_SENSORTAG*****************************************************/
+//Web-demo for sensortag
+cd contiki/examples/cc26xx/cc26xx-web-demo/
+nano project-conf.h
+	#define RF_BLE_CONF_ENABLED                   0
+	#define CC26XX_WEB_DEMO_CONF_MQTT_CLIENT      0
+	#define CC26XX_WEB_DEMO_CONF_6LBR_CLIENT      1
+	#define CC26XX_WEB_DEMO_CONF_COAP_SERVER      1
+	#define CC26XX_WEB_DEMO_CONF_NET_UART         0
+
+make TARGET=srf06-cc26xx BOARD=sensortag/cc2650 cc26xx-web-demo.bin CPU_FAMILY=cc26xx
+
+
+/***************************************************ACCESS*************************************************************/
+//With any browser in the network go to 
+http://[<Content of /var/log/6lbr.ip>]
+
+//from any firefox browser in the network with the Copper (CU) tool 
+go to coap://[<Content of /var/log/6lbr.ip>]:5683
+
+/*****************************************************MISC**************************************************************/
 // Get gcc arm crosscompiler gcc-arm-none-eabi
 sudo add-apt-repository ppa:team-gcc-arm-embedded/ppa
 sudo apt-get update
@@ -22,8 +99,6 @@ sudo apt-get install gcc-arm-embedded
 // Disable BLE in project-conf.h
 #define RF_BLE_CONF_ENABLED 0
 
-// Make Binary
-make TARGET=srf06-cc26xx BOARD=sensortag/cc2650 cc26xx-web-demo.bin CPU_FAMILY=cc26xx
 
 //contiki compiler
 sudo apt-get install gcc-msp430
