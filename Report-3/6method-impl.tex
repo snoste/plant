@@ -90,4 +90,22 @@ In order to flash the sensor tag, SmartRF Flash Programmer 2 made by Texas Instr
 \end{figure} 
 
 \subsection{Crossbow TelosB mote - slip-radio}
-This allows the Pi to act as a network coordinator for the sensor tags in the 6loWPAN network via the 802.15.4 enabled transceiver on the Crossbow. The software on the Crossbow is a slip-radio, specially made for it by Contiki. This
+This allows the Pi to act as a network coordinator for the sensor tags in the 6loWPAN network via the 802.15.4 enabled transceiver on the Crossbow. The software on the Crossbow is a slip-radio, specially made for it by Contiki. The slip radio from Contiki has to be cross compiled and uploaded to the TelosB. First make sure the correct configuration is correct and then make/compile the code into a binary file and upload it to the mote.
+
+\begin{lstlisting}[basicstyle=\small,language=bash,caption={Setting for the TelosB mote}]
+
+#For TelosB Sky-Mote
+cd contiki/examples/ipv6/slip-radio
+#connect the device
+#Configure the project-conf.h
+nano project-conf.h
+make TARGET=sky slip-radio.upload
+\end{lstlisting}
+
+\begin{lstlisting}[basicstyle=\small,language=c,caption={Setting for the TelosB mote}]
+
+#define NETSTACK_CONF_MAC     nullmac_driver
+#define NETSTACK_CONF_RDC  contikimac_driver
+#define NETSTACK_CONF_NETWORK slipnet_driver
+#define NETSTACK_CONF_FRAMER  no_framer
+\end{lstlisting}

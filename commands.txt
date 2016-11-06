@@ -19,24 +19,24 @@ Configure as Smart Bridge:
 https://github.com/cetic/6lbr/wiki/6LBR-Modes
 https://github.com/cetic/6lbr/wiki/6LBR-Interface-Configuration
 
-	//FILE: /etc/6lbr/6lbr.conf
-		MODE=SMART-BRIDGE
-		RAW_ETH=0
-		BRIDGE=1
-		CREATE_BRIDGE=0 #FOR BRIDGE
-		DEV_BRIDGE=br0
-		DEV_TAP=tap0
-		DEV_ETH=eth0
-		DEV_RADIO=/dev/ttyUSB0
-		BAUDRATE=115200
-		LOG_LEVEL=3 #INFO and above only
-	//EOF
-	//FILE: /etc/network/interfaces
-		auto lo
+//FILE: /etc/6lbr/6lbr.conf
+	MODE=SMART-BRIDGE
+	RAW_ETH=0
+	BRIDGE=1
+	CREATE_BRIDGE=0 #FOR BRIDGE
+	DEV_BRIDGE=br0
+	DEV_TAP=tap0
+	DEV_ETH=eth0
+	DEV_RADIO=/dev/ttyUSB0
+	BAUDRATE=115200
+	LOG_LEVEL=3 #INFO and above only
+//EOF
+//FILE: /etc/network/interfaces
+	auto lo
 		iface lo inet loopback
 		iface eth0 inet static
 		address 0.0.0.0
-		auto br0
+	auto br0
 		iface br0 inet dhcp
 		bridge_ports eth0
 		bridge_stp off
@@ -46,7 +46,7 @@ https://github.com/cetic/6lbr/wiki/6LBR-Interface-Configuration
 		iface wlan0 inet manual
 		wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
 		iface default inet dhcp
-	//EOF
+//EOF
 
 //Start,Stop,Restart  6LBR using:
 service 6lbr stop
@@ -58,15 +58,15 @@ cat /var/log/6lbr.log
 cat /var/log/6lbr.ip
 
 /************************************************CONTIKI_LBR********************************************************/
-//For TelosB Sky-Mote (NOT SURE ABOUT THAT PART!)
+//For TelosB Sky-Mote
 cd contiki/examples/ipv6/slip-radio
-in project-conf.h
+//in project-conf.h
 	#define NETSTACK_CONF_MAC     nullmac_driver
 	#define NETSTACK_CONF_RDC     contikimac_driver
 	#define NETSTACK_CONF_NETWORK slipnet_driver
 	#define NETSTACK_CONF_FRAMER no_framer
 
-connect the device
+//connect the device
 make TARGET=sky slip-radio.upload
 
 
