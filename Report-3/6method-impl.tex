@@ -6,7 +6,7 @@ A good overview of the project can be seen in Figure \ref{fig:over}.
 
 \begin{figure}[!h]
 	\begin{center}
-		\includegraphics[width=0.8\linewidth]{debugger}
+		\includegraphics[width=0.6\linewidth]{protocol}
 		\caption{sensor node connected with the debugger to a computer}
 		\label{fig:over}
 	\end{center}
@@ -15,7 +15,28 @@ A good overview of the project can be seen in Figure \ref{fig:over}.
 
 \subsection{Raspberry pi - 6LoWPAN Boarder Router}
 
-The raspberry pi acts as a boarder router for the WSN in Smart brigde mode (see ). It mitigates information to from the WSN mesh into the IPv6 network of the router. The boarder router is installed into the Raspberry pi 
+The raspberry pi acts as a boarder router for the WSN in Smart brigde mode (see ). It mitigates information to from the WSN mesh into the IPv6 network of the router. The boarder router is installed into the Raspberry pi via the 6LBR-1.3.3 Packages for Raspian. The service can be started through the terminal and the status of the working service can be seen in Figure \ref{fig:router}.
+
+\begin{lstlisting}[language=bash,caption={start the 6lbr service and check the status}]
+$ sudo 6lbr service start
+$ sudo service 6lbr status
+● 6lbr.service - LSB: 6LoWPAN Border Router
+Loaded: loaded (/etc/init.d/6lbr)
+Active: active (running); 1h 32min ago
+\end{lstlisting}
+
+
+
+\begin{figure}[!h]
+	\begin{center}
+		\includegraphics[width=\linewidth]{serviceStatus}
+		\caption{The 6lbr service running the boarder router}
+		\label{fig:router}
+	\end{center}
+\end{figure} 
+
+\subsection{TI Sensor Tag - Sensor nodes}
+
 
 
 \subsection{Flashing the Texas Instrument Sensor-Tag} 
