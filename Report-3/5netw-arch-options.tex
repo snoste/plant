@@ -1,7 +1,7 @@
 \section{Architecture}
 In this section the architecture of the plant monitoring system application will be described. All the following steps will be made by using the guide developed by Laurent Deru, Sébastien Dawans and Mathieu Ocana, available in GitHub under permissive 3-clause BSD-style open source license \cite{6lbr}. However, in the tutorial the TelosB node is used instead of the Texas Instrument Sensor Tags. Using the TI nodes is the overall greatest challenge described in this paper. Especially where the Sensor Tag is a relatively new node.\\
 \subsection{The network}
-The network main idea is well depicted in figure \ref{fig:Network}. The raspberry pi act as a six low pan border router (6LBR) and act as a link between the Ethernet and the wireless sensor network. The wireless sensor network is composed by the TelosB that act as a sink for all the other sensor tags. The TelosB sensor is attached via USB to the Raspberry Pi.
+The network main idea is well depicted in Figure \ref{fig:Network}. The raspberry pi act as a six low pan border router (6LBR) and act as a link between the Ethernet and the wireless sensor network. The wireless sensor network is composed by the TelosB that act as a sink for all the other sensor tags. The TelosB sensor is attached via USB to the Raspberry Pi.
 \begin{figure}[!h]
 	\includegraphics[width=\linewidth]{Network}
 	\caption{Development of the network}
@@ -15,6 +15,39 @@ Before commence the description of web server, it is essential to explain the Co
 
 \subsection{WebServer}
 There is a WebServer already embedded into 6LBR. The interface is shown in Figure \ref{fig:interface}. It is possible to see an overview of the network, edit the setting of the Border Router and operate administrative tasks. However, due to lack of time, we did not create our custom webserver nor implement it further but we have made a python script that can be used to ping certain values from the sensor notes.
+
+\begin{lstlisting}[basicstyle=\tiny,language=python,caption={Python code built on a open source CoAP library \cite{coapCode}. got to read CoAP messages that could also be used to output data onto a more user friendly web page}]
+
+
+import logging
+import asyncio
+
+from aiocoap import *
+
+logging.basicConfig(level=logging.INFO)
+
+@asyncio.coroutine
+def main():
+	protocol = yield from Context.create_client_context()
+
+	request = Message(code=GET)
+	request.set_request_uri \
+	('coap://[2002:aaa:2e10:10:212:7400:13ea:961]/dev/uptime')
+
+	try:
+		response = yield from protocol.\
+		request(request).response
+	except Exception as e:
+		print('Failed to fetch resource:')
+		print(e)
+	else:
+		print('Result: %s\n%r'% \
+		(response.code, response.payload))
+
+if __name__ == "__main__":
+asyncio.get_event_loop().run_until_complete(main())
+
+\end{lstlisting}
 
 
 
