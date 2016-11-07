@@ -1,0 +1,47 @@
+\section{Quality of service - QoS}
+
+In order to discuss the quality of service of our network, two protocols have to be especially investigated. Firstly the QoS of the unslotted CSMA in the 6loWPAN network between Sensor Tags and the border router which is also the mesh coordinator. Secondly the CoAP protocol between the user and the border router.
+
+\subsection{Unslotted CSMA/CA}
+
+The data packets being send via CSMA/CA to and from the mesh coordinator happen during intervals defined in the Sensor Tags configurations. The Sensor Tag has built in a Received Signal Strength Indicator (RSSI) built in and can be read from a register. RSSI report the desired signal strength with the noise power added to it, which in the case of a plant monitoring system operating on the same frequency as WiFi is very unfortunate. When RSSI is measured it always show a high value for the signal strength because the prototype is located in a small apartment with over 10 devices operating on the 2.4GHz range. Although RSSI would be an easy way to estimated the QoS it does not ensure good results. Therefor required number of packet retransmissions (RNP) or EXT would be a much better solution.
+
+Observing the RNP value when optimizing the system helped drastically to improve the setup and find out which configurations worked most efficiently in this application environment. Initially with no change to the settings of the Sensor Tags the RNP showed 14 required retransmissions for each packet for a successful delivery, this represents Case 1 in Table \ref{fig:qos}. This high number relates mostly to the high amount of noise in the apartment. When reducing the noise and turning all devices to airplane mode another measurement was taken, representing Case 2, showing a significantly lower number: RNP = 10. Then another measurement was taken when the routers wifi radio was turned off. That did not show remarkable change but nevertheless reduced to RNP = 9. In Table \ref{fig:rnp} there is a conclusion of the improvement in relation to the cases tested.
+
+\begin{table}[htbp]
+	\caption{Statics of communication data of the network}
+	\label{qos}
+	\begin{center}
+		\begin{tabular}{p{1cm}p{.9cm}p{1cm}p{1.2cm}p{1cm}p{1cm}}
+			\hline
+			CSMA/CA& Sent Packets & Received packets & Not acked packets & Collisions & Retrans-missions \\ \hline
+			Case 1 & 69 & 51 & 8 & 572&580 \\ 
+			Case 2 & 197 & 222 & 103 & 1067&1159 \\ 
+			Case 3 & 258 & 188 & 100 & 558&643 \\ \hline
+		\end{tabular}
+	\end{center}
+	
+\end{table}
+The RNP was calculated with the following equation:\\
+
+$RNP = \dfrac{ (sent packets + retransmissions)}{reieved packets - not acked packets} -1 $
+
+\begin{table}[htbp]
+	\caption{A conclusion of the RNP calculated for each case.}
+	\label{rnp}
+	\begin{center}
+		\begin{tabular}{lr}
+			\hline
+			CSMA/CA &RNP \\ \hline
+			Case 1&1s4 \\ 
+			Case 2&10 \\ 
+			Case 3&9 \\ \hline
+		\end{tabular}
+	\end{center}
+	
+\end{table}
+
+
+\subsection{CoAP}
+
+The CoAP allows the user to view data from the sensor over the local IPv6 network. There is not a certified way the measure the quality of service of CoAP but there are some options that can be configure that might be more suitable in some cases. For example in this project were there is much noise is in the network thus links might not be symmetric so when disabling acknowledgement in the CoAP protocol (using NON GET instead of CON GET). That showed to improve the response time of the GET commands to the sensors from 10 to about 1-2 seconds.
