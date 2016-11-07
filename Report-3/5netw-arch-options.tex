@@ -14,6 +14,7 @@ The Raspberry Pi connect the two subnets via RPL protocol on the wireless sensor
 Before commence the description of web server, it is essential to explain the CoAP protocol. CoAP stands for Constarined Application Protocol \cite{coap}. It is an application protocol used for transferring information as it were HTTP, using the usual commands e.g. GET, PUT and POST. It works as client/server model where a server (in our case the sensor tag) can be requested to send data from the client side using the commands HTTP/CoAP commands. However, it differs from HTTP were CoAP works on constrained devices such as our sensor tag. CoAP is designed to limit the consumption of RAM, thus packets are made much smaller.
 
 \subsection{WebServer}
+There is a WebServer already embedded into 6LBR. The interface is shown in Figure \ref{fig:interface}. It is possible to see an overview of the network, edit the setting of the Border Router and operate administrative tasks. However, due to lack of time, we did not create our custom webserver nor implement it further but we have made a python script that can be used to ping certain values from the sensor notes.
 
 
 
